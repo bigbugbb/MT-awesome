@@ -2,10 +2,12 @@ node {
     try {
         ws("${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}/") {
             withEnv(["GOPATH=${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"]) {
-                env.PATH="${GOPATH}/bin:$PATH"
+                sh 'source /etc/profile && source ~/.bash_profile && env'
                 
                 stage('Checkout') {
                     echo 'Checking out SCM'
+                    echo "$JENKINS_HOME"
+                    echo "$GOROOT"
                     checkout scm
                 }
                 
