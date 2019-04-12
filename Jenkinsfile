@@ -8,7 +8,7 @@ node {
             
                 stage('Checkout') {
                     echo 'Checking out SCM'
-                    echo "$JENKINS_HOME"
+                    echo "$JENKINS_HOME"            
                     checkout scm
                 }
                 
@@ -17,11 +17,11 @@ node {
 
                     sh 'go version'
                     sh 'go get -u github.com/golang/dep/cmd/dep'
-                    sh 'go get -u github.com/golang/lint/golint'
+                    sh 'go get -u golang.org/x/lint/golint'
                     sh 'go get github.com/tebeka/go2xunit'
                     
                     // or -update
-                    sh 'cd ${GOPATH}/src/cmd/project/ && dep ensure' 
+                    sh 'cd ${GOPATH}/src/server && dep ensure' 
                 }
         
                 stage('Test') {
@@ -37,8 +37,8 @@ node {
 
                     sh """cd $GOPATH && go tool vet ${paths}"""
 
-                    echo 'Linting'
-                    sh """cd $GOPATH && golint ${paths}"""
+                    // echo 'Linting'
+                    // sh """cd $GOPATH && golint ${paths}"""
                     
                     echo 'Testing'
                     sh """cd $GOPATH && go test -race -cover ${paths}"""
