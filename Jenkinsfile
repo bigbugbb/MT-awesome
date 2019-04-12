@@ -1,6 +1,6 @@
 node {
     // Install the desired Go version
-    def root = tool name: 'Go 1.12.1', type: 'go'
+    def root = tool name: 'Go 1.12.4', type: 'go'
 
     try {
         ws("${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}/") {
