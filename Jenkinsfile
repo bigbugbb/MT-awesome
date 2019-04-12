@@ -12,13 +12,14 @@ node {
                 stage('Pre Test') {
                     echo 'Pulling Dependencies'
 
-                    sh 'sudo su -s /bin/bash jenkins'
+                    // sh 'sudo su -s /bin/bash jenkins'
                     // sh 'yum update'
                     sh 'wget https://dl.google.com/go/go1.12.2.linux-amd64.tar.gz'
                     sh 'tar -xzf go1.12.2.linux-amd64.tar.gz'
                     sh 'rm go1.12.2.linux-amd64.tar.gz'
 
                     sh 'source /etc/profile && source ~/.bash_profile && env'
+                    sh 'echo $GOROOT'
                     sh 'go version'
                     sh 'go get -u github.com/golang/dep/cmd/dep'
                     sh 'go get -u github.com/golang/lint/golint'
