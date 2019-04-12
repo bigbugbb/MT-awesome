@@ -2,8 +2,7 @@ node {
     try {
         ws("${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}/") {
             withEnv(["GOPATH=${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"]) {
-                sh 'source /etc/profile && source ~/.bash_profile && env'
-                
+            
                 stage('Checkout') {
                     echo 'Checking out SCM'
                     echo "$JENKINS_HOME"
@@ -12,7 +11,13 @@ node {
                 
                 stage('Pre Test') {
                     echo 'Pulling Dependencies'
-            
+
+                    sh 'yum update'
+                    sh 'wget https://dl.google.com/go/go1.12.2.linux-amd64.tar.gz'
+                    sh 'tar -xzf go1.12.2.linux-amd64.tar.gz'
+                    sh 'rm go1.12.2.linux-amd64.tar.gz'
+
+                    sh 'source /etc/profile && source ~/.bash_profile && env'
                     sh 'go version'
                     sh 'go get -u github.com/golang/dep/cmd/dep'
                     sh 'go get -u github.com/golang/lint/golint'
