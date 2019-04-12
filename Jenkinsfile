@@ -7,7 +7,6 @@ node {
                 stage('Checkout') {
                     echo 'Checking out SCM'
                     echo "$JENKINS_HOME"
-                    echo "$GOROOT"
                     checkout scm
                 }
                 
