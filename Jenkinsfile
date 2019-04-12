@@ -12,8 +12,8 @@ node {
                 stage('Pre Test') {
                     echo 'Pulling Dependencies'
 
-                    sh 'sudo su'
-                    sh 'yum update'
+                    sh 'sudo su -s /bin/bash jenkins'
+                    // sh 'yum update'
                     sh 'wget https://dl.google.com/go/go1.12.2.linux-amd64.tar.gz'
                     sh 'tar -xzf go1.12.2.linux-amd64.tar.gz'
                     sh 'rm go1.12.2.linux-amd64.tar.gz'
